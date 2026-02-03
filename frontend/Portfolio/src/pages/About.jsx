@@ -9,8 +9,8 @@ import discord from "../assets/discord.svg"
 
 function About() {
   return (
-    <section className="my-16 flex justify-between">
-      <div className="md:w-150 flex flex-col justify-center">
+    <section className="my-16 flex md:justify-between md:flex-row flex-col">
+      <div className="md:w-150 flex flex-col justify-center md:text-left text-center">
         <h3 className="text-3xl font-bold mb-6">About Myself !</h3>
         <p>
           I’m Safal Gautam, a Computer Engineering undergrad with a strong
@@ -20,7 +20,7 @@ function About() {
           and approaching challenges with patience and an open mind, always
           aiming to grow both as a developer and a person.
         </p>
-        <div className="flex flex-row">
+        <div className="flex flex-row md:justify-start justify-around">
           <a href="https://www.facebook.com/safalgautam22/" target="_blank">
             <img src={fb} alt="Facebook" className="icons" />
           </a>
@@ -49,7 +49,8 @@ function About() {
           </a>
         </div>
       </div>
-      <img src={aboutPic} alt="About Image" className="h-100 hover:scale-110" />
+      <div></div>
+      <img src={aboutPic} alt="About Image" className="object-contain md:w-1/4 hover:scale-110 w-1/2 m-auto md:m-0" />
     </section>
   );
 }

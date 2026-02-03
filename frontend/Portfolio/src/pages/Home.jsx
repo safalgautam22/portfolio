@@ -1,4 +1,4 @@
-import Nav from "./Navbar";
+import Nav from "../components/Navbar";
 import Introduction from "./Intro";
 import Project from "./Project";
 import About from "./About";
