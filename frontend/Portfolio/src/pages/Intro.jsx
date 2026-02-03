@@ -2,7 +2,7 @@ import heroPic from "../assets/pic.png";
 
 function Introduction() {
   return (
-    <section className="flex flex-col md:flex-row items-center justify-between mt-16 mb-30 md:my-32 px-4 md:px-10 gap-10 h-100 md:h-150">
+    <section className="flex flex-col md:flex-row items-center justify-between mt-16 mb-50 md:my-32 px-4 md:px-10 gap-10 h-100 md:h-150">
       
       <div className="w-full md:w-1/2 text-center md:text-left">
         <h1 className="text-3xl md:text-4xl font-bold mb-2 text-(--primary)">

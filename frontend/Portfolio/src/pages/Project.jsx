@@ -1,9 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
+const exception = ["safalgautam22", "vscode_customization", "heliosis", "Cpp"];
+
 function Card({ repo }) {
   return (
-    <div className="bg-[#110b0370] rounded-2xl shadow-lg p-6 mb-10 h-60 flex flex-col w-[90%] justify-around hover:-translate-y-3 hover:scale-110">
+    <div className="bg-[#110b0370] rounded-2xl shadow-lg p-6 mb-10 h-80 flex flex-col w-[90%] justify-around hover:-translate-y-3 hover:scale-110">
       <h2 className="text-xl font-bold mb-2">{repo.name}</h2>
       <p className="text-gray-300 text-base mb-4">
         {repo.description || "No description provided."}
@@ -30,7 +32,6 @@ function Card({ repo }) {
 }
 
 function Project() {
-  const exception = ["safalgautam22", "vscode_customization", "heliosis"];
   const [repos, setRepos] = useState([]);
   const [visibleCount, setVisibleCount] = useState(2);
 
@@ -72,10 +73,15 @@ function Project() {
         ))}
       </div>
       <div className="flex justify-center">
-        <button className="bg-(--primary) p-2 w-35 h-10 text-xl rounded-full hover:bg-amber-800 font-semibold"
+        <button
+          className="bg-(--primary) p-2 w-35 h-10 text-xl rounded-full hover:bg-amber-800 font-semibold"
           onClick={() => {
             if (visibleCount >= repos.length) {
               setVisibleCount(2);
+              const projectsSection = document.getElementById("projects");
+              projectsSection?.scrollIntoView({
+                behavior: "instant",
+              });
             } else {
               setVisibleCount(visibleCount + 2);
             }
