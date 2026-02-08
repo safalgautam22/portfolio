@@ -1,51 +1,86 @@
+import { useState } from "react";
+import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
+
 function Contact() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const formSubmission = (e) => {
+    e.preventDefault();
+
+    try {
+      axios.post("http://localhost:3000/submit", formData);
+      toast.success("Contact form submitted successfully ");
+      setFormData({ name: "", email: "", message: "" });
+    } catch (error) {
+      console.log(error);
+      toast.error("Failed to submit form ");
+    }
+  };
+
   return (
     <section>
+      <Toaster position="top-center" />
+
       <div>
         <h2 className="text-center text-3xl font-bold">Contact Me</h2>
         <p className="text-center text-gray-500 italic">
           I’m open to new opportunities and always happy to connect.
         </p>
       </div>
+
       <form
-        action="https://formspree.io/f/xovwjvvl"
-        method="post"
+        onSubmit={formSubmission}
         className="flex flex-col items-center gap-4 m-10"
       >
         <div className="inputs">
-          <label for="name">Name:</label>
+          <label htmlFor="name">Name:</label>
           <input
             type="text"
             name="name"
+            value={formData.name}
+            onChange={handleChange}
             className="border-2 border-gray-400 p-2 rounded"
-            placeholder="Enter your name"
             required
           />
         </div>
 
         <div className="inputs">
-          <label for="email">Email:</label>
+          <label htmlFor="email">Email:</label>
           <input
             type="email"
             name="email"
+            value={formData.email}
+            onChange={handleChange}
             className="border-2 border-gray-400 p-2 rounded"
-            placeholder="Enter your email"
             required
           />
         </div>
 
         <div className="inputs">
-          <label for="message">Message</label>
+          <label htmlFor="message">Message</label>
           <textarea
             name="message"
-            className="border-2 border-gray-400 p-2 rounded resize-none"
+            value={formData.message}
+            onChange={handleChange}
+            className="border-2 border-gray-400 p-2 rounded resize-none min-h-35"
             rows="5"
-            placeholder="Enter your message"
             required
-          ></textarea>
+          />
         </div>
 
-        <button type="submit" className="bg-(--primary) w-75 rounded p-2.5 font-bold hover:bg-amber-600 hover:-translate-y-1 mt-5">
+        <button type="submit" className="bg-(--primary) w-75 rounded p-2.5 font-bold mt-5 hover:-translate-y-1 hover:opacity-80">
           Send Message
         </button>
       </form>
