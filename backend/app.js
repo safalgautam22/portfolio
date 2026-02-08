@@ -1,7 +1,11 @@
 import express from "express"
-import { contact } from "./controllers/contact.js";
+import { contact } from "./controller/contact.js";
+import cors from "cors"
 const app = express();
-app.use(express.urlencoded({ extended: true }));
+app.use(cors({
+    origin : "http://localhost:5173"
+}
+))
 app.use(express.json())
 
 app.post("/submit", contact);
