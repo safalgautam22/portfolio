@@ -1,8 +1,9 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import CV from "../assets/CV.pdf";
 import hamburger from "../assets/hamburger.svg";
 
-function SideBar({ isOpen, closeSidebar }) {
+export const SideBar = ({ isOpen, closeSidebar }) => {
   return (
     <div
       className={`fixed top-0 right-0 h-full w-3/5 bg-(--black) z-50 p-6 flex flex-col gap-6
@@ -25,17 +26,17 @@ function SideBar({ isOpen, closeSidebar }) {
       <a href="#about" className="nav-link" onClick={closeSidebar}>
         About
       </a>
-      <a href="#blogs" className="nav-link" onClick={closeSidebar}>
+      <Link to="/blogs" onClick={closeSidebar}>
         Blogs
-      </a>
+      </Link>
       <a href="#contact" className="nav-link" onClick={closeSidebar}>
         Contact
       </a>
     </div>
   );
-}
+};
 
-function Nav() {
+export const Nav = ({ showCV = true }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   function DownloadCV() {
@@ -55,20 +56,40 @@ function Nav() {
         </div>
 
         <ul className="nav-links">
-          <li><a href="/" className="nav-link">Home</a></li>
-          <li><a href="#projects" className="nav-link">Projects</a></li>
-          <li><a href="#about" className="nav-link">About</a></li>
-          <li><a href="#blogs" className="nav-link">Blogs</a></li>
-          <li><a href="#contact" className="nav-link">Contact</a></li>
+          <li>
+            <a href="/" className="nav-link">
+              Home
+            </a>
+          </li>
+          <li>
+            <a href="./#projects" className="nav-link">
+              Projects
+            </a>
+          </li>
+          <li>
+            <a href="./#about" className="nav-link">
+              About
+            </a>
+          </li>
+          <Link to="/blogs" className="nav-link">
+            <li>Blogs</li>
+          </Link>
+          <li>
+            <a href="./#contact" className="nav-link">
+              Contact
+            </a>
+          </li>
         </ul>
 
         <div className="flex items-center gap-4">
-          <button
-            className="bg-(--primary) w-24 h-10 text-xl font-bold rounded-lg hover:bg-amber-600 hover:-translate-y-1 transition"
-            onClick={DownloadCV}
-          >
-            My CV
-          </button>
+          {showCV && (
+            <button
+              className="bg-(--primary) w-24 h-10 text-xl font-bold rounded-lg hover:bg-amber-600 hover:-translate-y-1 transition"
+              onClick={DownloadCV}
+            >
+              My CV
+            </button>
+          )}
 
           <button
             className="sm:hidden p-2 w-12 h-12 rounded-lg hover:bg-[#110b0370] hover:-translate-y-1 active:rotate-45 transition"
@@ -85,6 +106,4 @@ function Nav() {
       />
     </>
   );
-}
-
-export default Nav;
+};
