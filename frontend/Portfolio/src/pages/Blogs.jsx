@@ -20,7 +20,6 @@ const BlogCard = ({ blog }) => {
         className="mt-5 prose line-clamp-2"
         dangerouslySetInnerHTML={{ __html: blog.body }}
       />
-      <p>{blog._id}</p>
     </Link>
   );
 };

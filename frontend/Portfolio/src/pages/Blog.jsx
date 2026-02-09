@@ -42,3 +42,16 @@ export const Blog = () => {
     </>
   );
 };
+
+export const DeleteBlog = () => {
+  const params = useParams()
+  const id = params.id
+
+  const deleteblog = async () => {
+    console.log(id)
+    await axios.delete("http://localhost:3000/deleteblog/"+id)
+  }
+  return (
+    <button className="w-1/3 h-1/3 bg-(--primary) text-2xl font-bold rounded m-auto" onClick={deleteblog}>Delete</button>
+  )
+}
