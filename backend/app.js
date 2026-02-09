@@ -4,7 +4,7 @@ import cors from "cors"
 import { connectDatabase } from "./connection.js";
 
 import { contact } from "./controller/contact.js";
-import { uploadBlog, fetchBlogs, fetchBlog } from "./controller/blog.js";
+import { uploadBlog, fetchBlogs, fetchBlog, deleteBlog } from "./controller/blog.js";
 
 const app = express();
 const storage = multer.memoryStorage()
@@ -22,6 +22,7 @@ app.post("/submit", contact);
 app.post("/uploadblog",upload.single("file"), uploadBlog);
 app.get("/blogs", fetchBlogs);
 app.get("/blog/:id", fetchBlog)
+app.delete("/deleteblog/:id", deleteBlog)
 
 app.listen(3000, () => {
     console.log("Server started on port 3000");

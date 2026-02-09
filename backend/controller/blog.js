@@ -3,23 +3,16 @@ import { Blogs } from "../Model/blogModel.js";
 
 const getTitleAndBody = (markdown) => {
   const lines = markdown.split("\n");
-
-  // Title (remove leading #)
-  const rawTitle = lines[0].replace(/^#+\s*/, "");
+  const rawTitle = lines[0].replace(/^#+\s*/, ""); // Title (remove leading #)
   const title = marked.parseInline(rawTitle);
-
-  // Body (everything except first line)
-  const bodyMarkdown = lines.slice(1).join("\n");
+  const bodyMarkdown = lines.slice(1).join("\n"); // Body (everything except first line)
   const body = marked.parse(bodyMarkdown);
-
   return { title, body };
 };
 
 export const uploadBlog = async (req, res) => {
-  const data = req.file.buffer;
   const content = req.file.buffer.toString("utf-8");
   const { title, body } = getTitleAndBody(content);
-
   try {
     await Blogs.create({
       title,
@@ -40,7 +33,18 @@ export const fetchBlogs = async (req, res) => {
 };
 
 export const fetchBlog = async (req, res) => {
-  const id = req.params.id
-  const data = await Blogs.findById(id)
-  res.json(data)
+  const id = req.params.id;
+  const data = await Blogs.findById(id);
+  res.json(data);
+};
+
+export const deleteBlog = async (req, res) => {
+  const id = req.params.id;
+  console.log(id);
+  try {
+    await Blogs.findByIdAndDelete(id);
+  } catch (err) {
+    console.log(err);
+  }
+  res.send(`Blog id: ${id} deleted successfully`);
 };
