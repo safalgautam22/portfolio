@@ -1,10 +1,10 @@
-import Nav from "../components/Navbar";
-import Introduction from "./Intro";
-import Project from "./Project";
-import About from "./About";
-import Contact from "./Contact";
+import { Nav } from "../components/Navbar";
+import { Introduction } from "../components/Intro";
+import { Project } from "../components/Project";
+import { About } from "../components/About";
+import { Contact } from "../components/Contact";
 
-function Home() {
+export const Home = () => {
   return (
     <>
       <nav><Nav /></nav>
@@ -16,5 +16,3 @@ function Home() {
     </>
   );
 }
-
-export default Home;

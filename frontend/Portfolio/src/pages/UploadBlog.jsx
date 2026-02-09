@@ -3,7 +3,7 @@ import axios from "axios";
 import upload from "../assets/upload.svg";
 import toast, { Toaster } from "react-hot-toast";
 
-function UploadBlog() {
+export const UploadBlog = () => {
   const [filename, setFilename] = useState("No file selected");
   const [filedata, setFiledata] = useState({
     file: null,
@@ -81,5 +81,3 @@ function UploadBlog() {
     </>
   );
 }
-
-export default UploadBlog;
