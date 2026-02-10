@@ -3,6 +3,7 @@ import { Nav } from "../components/Navbar";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
+import toast, {Toaster} from "react-hot-toast"
 
 export const Blog = () => {
   const params = useParams();
@@ -27,15 +28,15 @@ export const Blog = () => {
         <title>{blog.title}</title>
       </head>
       <Nav showCV={false} />
-      <div className="mt-20 w-4/5 m-auto">
-        <h1 className="text-center text-3xl font-bold text-(--primary) mb-10">
+      <div className="mt-20 md:w-4/5 m-auto">
+        <h1 className="text-center md:text-3xl text-2xl font-bold text-(--primary) mb-10">
           {blog.title}
         </h1>
         <span className="text-gray-500 ">
           Updated at: {new Date(blog.createdAt).toLocaleDateString()}
         </span>
         <div
-          className="mt-5 flex flex-col gap-5 text-xl "
+          className="mt-5 flex flex-col gap-5 text-4 "
           dangerouslySetInnerHTML={{ __html: blog.body }}
         />
       </div>
@@ -48,10 +49,21 @@ export const DeleteBlog = () => {
   const id = params.id
 
   const deleteblog = async () => {
-    console.log(id)
-    await axios.delete("http://localhost:3000/deleteblog/"+id)
+    try{
+
+      await axios.delete("http://localhost:3000/deleteblog/"+id)
+      toast.success(`Blog : ${id} deleted successfully`)
+      
+    }
+    catch(err)
+    {
+      console.log(err)
+    }
   }
   return (
+    <>
+    <Toaster position="top-center"/>
     <button className="w-1/3 h-1/3 bg-(--primary) text-2xl font-bold rounded m-auto" onClick={deleteblog}>Delete</button>
+    </>
   )
 }

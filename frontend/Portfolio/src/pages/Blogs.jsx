@@ -8,16 +8,16 @@ const BlogCard = ({ blog }) => {
   return (
     <Link
       to={"/blog/" + blog._id}
-      className="p-10 rounded-2xl mt-10 bg-[#110b0370] shadow-lg hover:scale-110 w-[60%]"
+      className="p-10 rounded-2xl mt-10 bg-[#110b0370] shadow-lg hover:scale-105 md:w-[60%]"
     >
-      <h1 className="text-3xl font-bold text-(--primary) mb-5 hover:underline transition-all ease-in-out duration-300 ">
+      <h1 className="md:text-3xl text-xl font-bold text-(--primary) mb-5 hover:underline transition-all ease-in-out duration-300 ">
         {blog.title}
       </h1>
       <span className="text-gray-500">
         Updated at: {new Date(blog.createdAt).toLocaleDateString()}
       </span>
       <div
-        className="mt-5 prose line-clamp-2"
+        className="mt-5 prose line-clamp-3"
         dangerouslySetInnerHTML={{ __html: blog.body }}
       />
     </Link>

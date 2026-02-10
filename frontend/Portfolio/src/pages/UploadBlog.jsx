@@ -53,13 +53,13 @@ export const UploadBlog = () => {
     <>
       <Toaster position="top-center" />
       <div className="flex flex-col items-center gap-3">
-        <h1 className="m-10 text-4xl">Upload a .md file to upload blog</h1>
+        <h1 className="m-10 md:text-4xl text-2xl">Upload a .md file to upload blog</h1>
 
         <label
           htmlFor="blogfile"
-          className="cursor-pointer text-white px-5 py-2 font-semibold transition w-1/5 rounded-lg hover:-translate-y-1 hover:rotate-2"
+          className="cursor-pointer text-white px-5 py-2 font-semibold transition md:w-1/5 w-1/2 rounded-lg hover:-translate-y-1 hover:rotate-2"
         >
-          <img src={upload} alt="uploadbutton" className="m-auto" />
+          <img src={upload} alt="uploadbutton" className="md:m-auto" />
         </label>
         <input
           type="file"
@@ -73,7 +73,7 @@ export const UploadBlog = () => {
         <button
           onClick={uploadBlog}
           disabled={!filedata.file}
-          className="bg-(--primary) w-50 h-10 text-2xl font-bold hover:opacity-80 rounded active:opacity-50"
+          className="bg-(--primary) w-50 h-10 md:text-2xl font-bold hover:opacity-80 rounded active:opacity-50 text-xl"
         >
           Upload
         </button>
