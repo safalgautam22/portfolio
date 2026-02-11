@@ -1,9 +1,9 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Nav } from "../components/Navbar";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
-import toast, {Toaster} from "react-hot-toast"
+import toast, { Toaster } from "react-hot-toast";
 
 export const Blog = () => {
   const params = useParams();
@@ -36,34 +36,40 @@ export const Blog = () => {
           Updated at: {new Date(blog.createdAt).toLocaleDateString()}
         </span>
         <div
-          className="mt-5 flex flex-col gap-5 text-4 "
+          className="mt-5 flex prose prose-lg flex-col gap-5 text-4 blogcontent"
           dangerouslySetInnerHTML={{ __html: blog.body }}
         />
+        {console.log(blog.body)}
       </div>
     </>
   );
 };
 
 export const DeleteBlog = () => {
-  const params = useParams()
-  const id = params.id
+  const params = useParams();
+  const id = params.id;
+  const navigate = useNavigate();
 
   const deleteblog = async () => {
-    try{
-
-      await axios.delete("http://localhost:3000/deleteblog/"+id)
-      toast.success(`Blog : ${id} deleted successfully`)
-      
+    try {
+      await axios.delete("http://localhost:3000/deleteblog/" + id);
+      toast.success(`Blog : ${id} deleted successfully`);
+      setTimeout(() => {
+        navigate("/blogs");
+      }, 1000);
+    } catch (err) {
+      console.log(err);
     }
-    catch(err)
-    {
-      console.log(err)
-    }
-  }
+  };
   return (
     <>
-    <Toaster position="top-center"/>
-    <button className="w-1/3 h-1/3 bg-(--primary) text-2xl font-bold rounded m-auto" onClick={deleteblog}>Delete</button>
+      <Toaster position="top-center" />
+      <button
+        className="w-1/3 h-1/3 bg-(--primary) text-2xl font-bold rounded m-auto"
+        onClick={deleteblog}
+      >
+        Delete
+      </button>
     </>
-  )
-}
+  );
+};

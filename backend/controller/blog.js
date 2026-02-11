@@ -28,7 +28,7 @@ export const uploadBlog = async (req, res) => {
 };
 
 export const fetchBlogs = async (req, res) => {
-  const blogs = await Blogs.find();
+  const blogs = await Blogs.find().sort({ createdAt: -1 });
   res.json(blogs);
 };
 

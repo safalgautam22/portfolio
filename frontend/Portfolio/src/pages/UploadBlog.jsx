@@ -27,33 +27,39 @@ export const UploadBlog = () => {
     }
   };
   const uploadBlog = async () => {
-  if (!filedata.file) return;
+    if (!filedata.file) return;
 
-  try {
-    const formData = new FormData();
-    formData.append("file", filedata.file);
+    try {
+      const formData = new FormData();
+      formData.append("file", filedata.file);
 
-    const res = axios.post(
-      "http://localhost:3000/uploadblog",
-      formData,
-      { headers: { "Content-Type": "multipart/form-data" } }
-    );
+      const res = axios.post("http://localhost:3000/uploadblog", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
 
-    // toast after request finishes
-    toast.success("Uploaded Successfully");
-
-  } catch (err) {
-    console.log(err);
-    toast.error("Error uploading");
-  }
-};
-
+      // toast after request finishes
+      toast.success("Uploaded Successfully");
+      setFilename("No file selected");
+      setFiledata({
+        file: null,
+        name: "",
+        type: "",
+        updated_at: "",
+        size: 0,
+      });
+    } catch (err) {
+      console.log(err);
+      toast.error("Error uploading");
+    }
+  };
 
   return (
     <>
       <Toaster position="top-center" />
       <div className="flex flex-col items-center gap-3">
-        <h1 className="m-10 md:text-4xl text-2xl">Upload a .md file to upload blog</h1>
+        <h1 className="m-10 md:text-4xl text-2xl">
+          Upload a .md file to upload blog
+        </h1>
 
         <label
           htmlFor="blogfile"
@@ -80,4 +86,4 @@ export const UploadBlog = () => {
       </div>
     </>
   );
-}
+};
