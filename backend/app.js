@@ -7,6 +7,7 @@ import { contact } from "./controller/contact.js";
 import { uploadBlog, fetchBlogs, fetchBlog, deleteBlog } from "./controller/blog.js";
 
 const app = express();
+const Port = process.env.PORT || 3000
 const storage = multer.memoryStorage()
 const upload = multer({storage})
 connectDatabase()
@@ -18,13 +19,15 @@ app.use(cors({
 
 app.use(express.json())
 
+app.get("/", (req,res) => {
+    res.send("API runnung Successfully")
+})
 app.post("/submit", contact);
 app.post("/uploadblog",upload.single("file"), uploadBlog);
 app.get("/blogs", fetchBlogs);
 app.get("/blog/:id", fetchBlog)
 app.delete("/deleteblog/:id", deleteBlog)
 
-app.listen(3000, () => {
+app.listen(Port, () => {
     console.log("Server started on port 3000");
-    resizeBy.send("API running successfully")
 });
