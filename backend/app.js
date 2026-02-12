@@ -12,6 +12,11 @@ const storage = multer.memoryStorage()
 const upload = multer({storage})
 connectDatabase()
 
+app.use(cors({
+    origin : "https://www.safalgautam.com.np"
+}
+))
+
 app.use(express.json())
 
 app.get("/", (req,res) => {
