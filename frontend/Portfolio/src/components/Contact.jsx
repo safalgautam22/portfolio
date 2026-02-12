@@ -56,6 +56,7 @@ export const Contact = () => {
             onChange={handleChange}
             className="border-2 border-gray-400 p-2 rounded"
             required
+            autoComplete="name"
           />
         </div>
 
@@ -68,6 +69,7 @@ export const Contact = () => {
             onChange={handleChange}
             className="border-2 border-gray-400 p-2 rounded"
             required
+            autoComplete="email"
           />
         </div>
 
