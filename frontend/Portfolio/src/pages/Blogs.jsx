@@ -30,7 +30,7 @@ export const Blogs = () => {
   useEffect(() => {
     const getBlogs = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/blogs");
+        const res = await axios.get("https://portfolio-srsl.onrender.com/blogs");
         setBlog(res.data);
       } catch (err) {
         console.log(err);

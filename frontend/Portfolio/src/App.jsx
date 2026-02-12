@@ -4,6 +4,7 @@ import { Blogs } from "./pages/Blogs";
 import { UploadBlog } from "./pages/UploadBlog";
 import { Blog, DeleteBlog } from "./pages/Blog";
 
+
 function App() {
   return (
     <>

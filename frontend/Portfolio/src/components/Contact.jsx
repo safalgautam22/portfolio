@@ -2,6 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 
+const API = import.meta.env.VITE_API_URL;
+
 export const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -16,11 +18,12 @@ export const Contact = () => {
     });
   };
 
-  const formSubmission = (e) => {
+  const formSubmission = async (e) => {
     e.preventDefault();
 
     try {
-      axios.post("http://localhost:3000/submit", formData);
+      console.log(formData)
+      await axios.post(API+"submit", formData);
       toast.success("Contact form submitted successfully ");
       setFormData({ name: "", email: "", message: "" });
     } catch (error) {

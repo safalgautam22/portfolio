@@ -5,6 +5,8 @@ import { useEffect } from "react";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 
+const API = import.meta.env.VITE_API_URL;
+
 export const Blog = () => {
   const params = useParams();
   const id = params.id;
@@ -13,7 +15,7 @@ export const Blog = () => {
   useEffect(() => {
     const getBlog = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/blog/" + id);
+        const res = await axios.get(API+"blog/" + id);
         console.log(id);
         setBlog(res.data);
       } catch (err) {
@@ -52,7 +54,7 @@ export const DeleteBlog = () => {
 
   const deleteblog = async () => {
     try {
-      await axios.delete("http://localhost:3000/deleteblog/" + id);
+      await axios.delete(API+"deleteblog/" + id);
       toast.success(`Blog : ${id} deleted successfully`);
       setTimeout(() => {
         navigate("/blogs");

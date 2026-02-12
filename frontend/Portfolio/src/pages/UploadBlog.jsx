@@ -3,6 +3,8 @@ import axios from "axios";
 import upload from "../assets/upload.svg";
 import toast, { Toaster } from "react-hot-toast";
 
+const API = import.meta.env.VITE_API_URL;
+
 export const UploadBlog = () => {
   const [filename, setFilename] = useState("No file selected");
   const [filedata, setFiledata] = useState({
@@ -33,11 +35,10 @@ export const UploadBlog = () => {
       const formData = new FormData();
       formData.append("file", filedata.file);
 
-      const res = axios.post("http://localhost:3000/uploadblog", formData, {
+      const res = axios.post(`${API}uploadblog`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
-      // toast after request finishes
       toast.success("Uploaded Successfully");
       setFilename("No file selected");
       setFiledata({

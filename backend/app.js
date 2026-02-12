@@ -20,7 +20,7 @@ app.use(cors({
 app.use(express.json())
 
 app.get("/", (req,res) => {
-    res.send("API runnung Successfully")
+    res.send("API running Successfully")
 })
 app.post("/submit", contact);
 app.post("/uploadblog",upload.single("file"), uploadBlog);
