@@ -1,32 +1,24 @@
-import nodemailer from "nodemailer";
 import dotenv from "dotenv";
+import { Resend } from "resend";
 dotenv.config();
+
+const resend = new Resend(process.env.RESEND_API);
 
 export const contact = async (req, res) => {
   const { name, email, message } = req.body;
   console.log(req.body);
 
-  const transporter = nodemailer.createTransport({
-    host: process.env.MAIL_HOST,
-    port: Number(process.env.MAIL_PORT),
-    secure: true,
-    auth: {
-      user: process.env.MAIL_USER,
-      pass: process.env.MAIL_PASS,
-    },
-  });
-  const mailframe = {
-    from: email,
-    subject: `New contact submission in portfolio from ${name}`,
-    to: "contact@safalgautam.com.np",
-    text: `Name : ${name} \nE-mail : ${email} \nmessage : ${message}`,
-  };
-
   try {
-    await transporter.sendMail(mailframe);
+    await resend.emails.send({
+      from: "contact@safalgautam.com.np",
+      to: "contact@safalgautam.com.np",
+      subject: `New contact submission from ${name}`,
+      text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
+    });
+
     res.status(200).send("Mail sent successfully");
   } catch (error) {
     console.error(error);
-    res.status(500).send("error sending mail");
+    res.status(500).send("Error sending mail");
   }
 };
