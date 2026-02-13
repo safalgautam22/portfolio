@@ -17,21 +17,25 @@ export const SideBar = ({ isOpen, closeSidebar }) => {
         X
       </button>
 
-      <a href="/" className="nav-link" onClick={closeSidebar}>
+      <Link to="/" className="nav-link" onClick={closeSidebar}>
         Home
-      </a>
-      <a href="#projects" className="nav-link" onClick={closeSidebar}>
+      </Link>
+
+      <Link to="/#projects" className="nav-link" onClick={closeSidebar}>
         Projects
-      </a>
-      <a href="#about" className="nav-link" onClick={closeSidebar}>
+      </Link>
+
+      <Link to="/#about" className="nav-link" onClick={closeSidebar}>
         About
-      </a>
-      <Link to="/blogs" onClick={closeSidebar}>
+      </Link>
+
+      <Link to="/blogs" className="nav-link" onClick={closeSidebar}>
         Blogs
       </Link>
-      <a href="#contact" className="nav-link" onClick={closeSidebar}>
+
+      <Link to="/#contact" className="nav-link" onClick={closeSidebar}>
         Contact
-      </a>
+      </Link>
     </div>
   );
 };
@@ -57,27 +61,33 @@ export const Nav = ({ showCV = true }) => {
 
         <ul className="nav-links">
           <li>
-            <a href="/" className="nav-link">
+            <Link to="/" className="nav-link">
               Home
-            </a>
+            </Link>
           </li>
+
           <li>
-            <a href="./#projects" className="nav-link">
+            <Link to="/#projects" className="nav-link">
               Projects
-            </a>
+            </Link>
           </li>
+
           <li>
-            <a href="./#about" className="nav-link">
+            <Link to="/#about" className="nav-link">
               About
-            </a>
+            </Link>
           </li>
-          <Link to="/blogs" className="nav-link">
-            <li>Blogs</li>
-          </Link>
+
           <li>
-            <a href="./#contact" className="nav-link">
+            <Link to="/blogs" className="nav-link">
+              Blogs
+            </Link>
+          </li>
+
+          <li>
+            <Link to="/#contact" className="nav-link">
               Contact
-            </a>
+            </Link>
           </li>
         </ul>
 
