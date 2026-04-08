@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
+import { RingLoader } from "react-spinners";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 const API = import.meta.env.VITE_API_URL;
 
@@ -11,38 +13,52 @@ export const Blog = () => {
   const params = useParams();
   const id = params.id;
   const [blog, setBlog] = useState([]);
-
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     const getBlog = async () => {
       try {
         const res = await axios.get(`${API}blog/${id}`);
-        console.log(id);
         setBlog(res.data);
       } catch (err) {
         console.log(err);
+      } finally {
+        setLoading(false);
       }
     };
     getBlog();
   }, [id]);
   return (
     <>
-      <head>
-        <title>{blog.title}</title>
-      </head>
-      <Nav showCV={false} />
-      <div className="mt-20 md:w-4/5 m-auto">
-        <h1 className="text-center md:text-3xl text-2xl font-bold text-(--primary) mb-10">
-          {blog.title}
-        </h1>
-        <span className="text-gray-500 ">
-          Updated at: {new Date(blog.createdAt).toLocaleDateString()}
-        </span>
-        <div
-          className="mt-5 flex prose prose-lg flex-col gap-5 text-4 blogcontent"
-          dangerouslySetInnerHTML={{ __html: blog.body }}
-        />
-        {console.log(blog.body)}
-      </div>
+      {loading ? (
+        <div className="flex items-center justify-center h-96">
+          <div className="bg-[#110b0370] rounded-3xl p-4 flex items-center justify-center">
+            <RingLoader color="#ff5000" size={40} />
+          </div>
+        </div>
+      ) : (
+        <div>
+          <HelmetProvider>
+            <Helmet>
+              <title>{blog.title}</title>
+            </Helmet>
+          </HelmetProvider>
+
+          <Nav blog={true} />
+
+          <div className="mt-20 md:w-4/5 m-auto">
+            <h1 className="text-center md:text-3xl text-2xl font-bold text-(--primary) mb-10">
+              {blog.title}
+            </h1>
+            <span className="text-gray-500 ">
+              Updated at: {new Date(blog.createdAt).toLocaleDateString()}
+            </span>
+            <div
+              className="mt-5 flex prose prose-lg flex-col gap-5 text-4 blogcontent"
+              dangerouslySetInnerHTML={{ __html: blog.body }}
+            />
+          </div>
+        </div>
+      )}
     </>
   );
 };
@@ -54,7 +70,7 @@ export const DeleteBlog = () => {
 
   const deleteblog = async () => {
     try {
-      await axios.delete(API+"deleteblog/" + id);
+      await axios.delete(API + "deleteblog/" + id);
       toast.success(`Blog : ${id} deleted successfully`);
       setTimeout(() => {
         navigate("/blogs");

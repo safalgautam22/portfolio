@@ -15,8 +15,12 @@
     "dotenv": "^17.2.4",
     "react": "^19.2.0",
     "react-dom": "^19.2.3",
+    "react-helmet": "^6.1.0",
+    "react-helmet-async": "^3.0.0",
     "react-hot-toast": "^2.6.0",
-    "react-router-dom": "^7.13.0"
+    "react-router-dom": "^7.13.0",
+    "react-spinner": "^0.2.7",
+    "react-spinners": "^0.17.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",

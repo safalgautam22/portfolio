@@ -3,6 +3,8 @@ import { Nav } from "../components/Navbar";
 import { useState } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { RingLoader } from "react-spinners";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 const API = import.meta.env.VITE_API_URL;
 
@@ -28,6 +30,7 @@ const BlogCard = ({ blog }) => {
 
 export const Blogs = () => {
   const [blog, setBlog] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const getBlogs = async () => {
@@ -36,6 +39,8 @@ export const Blogs = () => {
         setBlog(res.data);
       } catch (err) {
         console.log(err);
+      } finally {
+        setLoading(false);
       }
     };
     getBlogs();
@@ -43,19 +48,29 @@ export const Blogs = () => {
 
   return (
     <>
-      <head>
-        <title>Blogs - Safal Gautam</title>
-      </head>
-      <Nav showCV={false} />
+      <HelmetProvider>
+        <Helmet>
+          <title>Blogs - Safal Gautam</title>
+        </Helmet>
+      </HelmetProvider>
+      <Nav blog={true} />
       <h1 className="font-bold text-center mt-15 text-(--primary) text-3xl">
         My Blogs
       </h1>
-      <div className="flex flex-col items-center">
-        {blog.map((blog) => (
-          <BlogCard blog={blog} key={blog._id} />
-        ))}
-      </div>
+
+      {loading ? (
+        <div className="flex items-center justify-center h-96">
+          <div className="bg-[#110b0370] rounded-3xl p-4 flex items-center justify-center">
+            <RingLoader color="#ff5000" size={40} />
+          </div>
+        </div>
+      ) : (
+        <div className="flex flex-col items-center">
+          {blog.map((blog) => (
+            <BlogCard blog={blog} key={blog._id} />
+          ))}
+        </div>
+      )}
     </>
   );
 };
-

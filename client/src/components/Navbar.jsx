@@ -36,7 +36,7 @@ export const SideBar = ({ isOpen, closeSidebar }) => {
   );
 };
 
-export const Nav = ({ showCV = true }) => {
+export const Nav = ({ blog = false }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   function DownloadCV() {
@@ -82,7 +82,7 @@ export const Nav = ({ showCV = true }) => {
         </ul>
 
         <div className="flex items-center gap-4">
-          {showCV && (
+          {!blog && (
             <button
               className="bg-(--primary) w-24 h-10 text-xl font-bold rounded-lg hover:bg-amber-600 hover:-translate-y-1 transition"
               onClick={DownloadCV}
