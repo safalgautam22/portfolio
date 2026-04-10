@@ -7,7 +7,7 @@ export const SideBar = ({ isOpen, closeSidebar }) => {
     <div
       className={`fixed top-0 right-0 h-full w-3/5 bg-(--black) z-50 p-6 flex flex-col gap-6
         transform transition-transform duration-300 ease-in-out
-        ${isOpen ? "translate-x-0" : "translate-x-full"} sm:hidden `}
+        ${isOpen ? "translate-x-0" : "translate-x-full"} sm:hidden pr-10 pt-5`}
     >
       <button
         className="self-end text-(--white) text-2xl font-bold hover:text-(--primary) active:rotate-45"
@@ -50,8 +50,8 @@ export const Nav = ({ blog = false }) => {
   return (
     <>
       <nav className="navbar flex justify-between items-center px-4 md:px-10 py-4 backdrop-blur-md">
-        <a
-          href="."
+        <Link
+          to="/"
           className="group transition-colors duration-300 cursor-pointer"
         >
           <h1 className="text-(--primary) text-2xl group-hover:text-(--white)">
@@ -61,7 +61,7 @@ export const Nav = ({ blog = false }) => {
             </span>{" "}
             {"}."}
           </h1>
-        </a>
+        </Link>
         <ul className="nav-links hidden sm:flex gap-6">
           <li>
             <Link smooth to="/#home" className="nav-link">
@@ -126,7 +126,7 @@ export const Nav = ({ blog = false }) => {
           </button>
 
           <button
-            className="sm:hidden p-2 w-10 h-10 rounded-lg hover:bg-(--black2) hover:-translate-y-1 active:rotate-45 transition border"
+            className="sm:hidden p-2 w-10 h-10 rounded-lg hover:bg-(--black2) hover:scale-110 transition border"
             onClick={() => setSidebarOpen(true)}
           >
             <img src={hamburger} alt="Menu" />
